@@ -24,58 +24,51 @@ class ImageGalleryPageState extends State<ImageGalleryPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => _imageGalleryBloc,
-      child: BlocConsumer<ImageGalleryBloc, ImageGalleryState>(
-        listener: (context, state) {
-          print(state);
-        },
-        builder: (context, state) {
-          if (state is DataFromLocalState) {
-            _data = state.model;
-          }
-          if (state is DataFromServiceState) {
-            _data = state.model;
-          }
-
-          return Scaffold(
-            appBar: AppBar(
-              automaticallyImplyLeading: true,
-              title: const Text('Back'),
-              centerTitle: false,
-              // actions: [
-              //   if (state is! LoadingState)
-              //     Text(state is DataFromLocalState ? 'Local Data' : 'Service Data', textAlign: TextAlign.center,)
-              // ],
-            ),
-            body: SafeArea(
+    return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: true,
+        title: const Text('Back'),
+        centerTitle: false,
+      ),
+      body: BlocProvider(
+        create: (context) => _imageGalleryBloc,
+        child: BlocBuilder<ImageGalleryBloc, ImageGalleryState>(
+          builder: (context, state) {
+            if (state is DataFromLocalState) {
+              _data = state.model;
+            }
+            if (state is DataFromServiceState) {
+              _data = state.model;
+            }
+            return SafeArea(
               child: (state is LoadingState)
-                  ? const Center(child: CircularProgressIndicator())
+                ? const Center(child: CircularProgressIndicator())
+                : _data.isEmpty
+                  ? const Center(child: Text('There is no data here.'))
                   : GridView.builder(
-                      itemCount: _data.length,
-                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 4
-                      ),
-                      itemBuilder: (_, index) {
-                        return Stack(
-                          alignment: AlignmentDirectional.center,
+                  itemCount: _data.length,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 4
+                  ),
+                  itemBuilder: (_, index) {
+                    return Stack(
+                      alignment: AlignmentDirectional.center,
+                      children: [
+                        Image.network(_data.elementAt(index).thumbnailUrl),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Image.network(_data.elementAt(index).thumbnailUrl),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(_data.elementAt(index).id.toString()),
-                                Text(_data.elementAt(index).title, overflow: TextOverflow.ellipsis,),
-                              ],
-                            )
+                            Text(_data.elementAt(index).id.toString()),
+                            Text(_data.elementAt(index).title, overflow: TextOverflow.ellipsis,),
                           ],
-                        );
-                      }
-                  )
-            ),
-          );
-        })
-      );
+                        )
+                      ],
+                    );
+                  }
+                )
+            );
+        }),
+      ),
+    );
   }
-
 }

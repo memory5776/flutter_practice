@@ -19,10 +19,10 @@ class ImageGalleryBloc extends Bloc<ImageGalleryEvent, ImageGalleryState> {
       }
 
       // Get service data.
-      var serviceData = await ImageRepository.getPhotos();
-      if (serviceData.value != null) {
-        emit(DataFromServiceState(model: serviceData.value));
-        updateImageGalleryToHiveData(serviceData.value);
+      var serviceData = await ImageRepository().getPhotos();
+      if (serviceData?.value != null) {
+        emit(DataFromServiceState(model: serviceData?.value));
+        updateImageGalleryToHiveData(serviceData?.value);
       }
     });
 
