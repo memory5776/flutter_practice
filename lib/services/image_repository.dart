@@ -6,7 +6,7 @@ import 'package:practice_loading_images/services/APIResponse.dart';
 import '../models/image_gallery_model.dart';
 
 class ImageRepository {
-  static Future<APIResponse> getPhotos() async {
+  Future<APIResponse>? getPhotos() async {
 
     var response = await Dio().get(
         "https://jsonplaceholder.typicode.com/photo",
