@@ -3,7 +3,7 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Ap
+name: Flutter Release CI/CD
 
 on:
   pull_request:
