@@ -1,7 +1,7 @@
 
 
 import 'package:dio/dio.dart';
-import 'package:practice_loading_images/services/APIResponse.dart';
+import 'package:practice_loading_images/services/api_response.dart';
 
 import '../models/image_gallery_model.dart';
 
