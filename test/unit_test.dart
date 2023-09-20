@@ -1,6 +1,6 @@
 import 'package:mockito/mockito.dart';
 import 'package:practice_loading_images/models/image_gallery_model.dart';
-import 'package:practice_loading_images/services/APIResponse.dart';
+import 'package:practice_loading_images/services/api_response.dart';
 import 'package:practice_loading_images/services/image_repository.dart';
 import 'package:test/test.dart';
 

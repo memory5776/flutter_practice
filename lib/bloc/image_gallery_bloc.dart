@@ -1,5 +1,5 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:meta/meta.dart';
 import 'package:practice_loading_images/models/image_gallery_model.dart';
 import 'package:practice_loading_images/services/image_repository.dart';
 
