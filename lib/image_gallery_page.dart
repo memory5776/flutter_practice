@@ -24,6 +24,8 @@ class ImageGalleryPageState extends State<ImageGalleryPage> {
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: true,
@@ -54,7 +56,11 @@ class ImageGalleryPageState extends State<ImageGalleryPage> {
                     return Stack(
                       alignment: AlignmentDirectional.center,
                       children: [
-                        Image.network(_data.elementAt(index).thumbnailUrl),
+                        Image.network(_data.elementAt(index).thumbnailUrl,
+                          width: size.width / 4,
+                          errorBuilder: (_, __, ___) {
+                            return const Icon(Icons.error_outline);
+                          }),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
